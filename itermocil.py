@@ -251,7 +251,7 @@ class Itermocil(object):
                 pp = (p * 3) + 1
                 for q in range(0, 2):
                     if i >= num_panes:
-                        break 
+                        break
                     qp = pp + q
                     cp = pp + 1 + q
                     i += 1
@@ -402,6 +402,27 @@ class Itermocil(object):
             if num_panes > 3:
                 for p in range(0, num_panes-3):
                     self.applescript.append(prefix + 'keystroke "d" using command down')
+
+        elif layout == 'tile-and-bottom':
+            self.applescript.append(prefix + 'keystroke "D" using command down')
+            self.applescript.append(prefix + 'keystroke "D" using command down')
+
+            self.applescript.append(prefix + 'key code 125 using {command down}')
+            self.applescript.append(prefix + 'keystroke "d" using command down')
+            self.applescript.append(prefix + 'key code 125 using {command down}')
+            self.applescript.append(prefix + 'keystroke "d" using command down')
+
+        elif layout == 'even-vertical-and-3-stacks':
+            self.applescript.append(prefix + 'keystroke "d" using command down')
+            self.applescript.append(prefix + 'keystroke "D" using command down')
+            self.applescript.append(prefix + 'keystroke "D" using command down')
+
+            self.applescript.append(prefix + 'key code 123 using {command down}')
+            self.applescript.append(prefix + 'keystroke "D" using command down')
+
+            # if num_panes % 2 != 0:
+            #     # If odd number of panes then move once more to return to initial pane.
+            #     self.applescript.append(prefix + 'keystroke "]" using command down')
 
         # Raise an exception if we don't recognise the layout setting.
         else:
