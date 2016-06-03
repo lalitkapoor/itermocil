@@ -35,11 +35,11 @@ class Itermocil(object):
             v = self.get_version_string()
             bits = v.split('.')
             build = bits[2].replace('-nightly', '')
-            if (int(build) < 20150805):
-                print "This is an unsupported beta build of iTerm."
-                print "Try the latest nightly, or the 2.1.1 stable build."
-                print "See Readme notes for more info. Sorry!"
-                sys.exit(1)
+            #if (int(build) < 20150805):
+            #    print "This is an unsupported beta build of iTerm."
+            #    print "Try the latest nightly, or the 2.1.1 stable build."
+            #    print "See Readme notes for more info. Sorry!"
+            #    sys.exit(1)
 
         # Initiate from arguments
         self.file = teamocil_file
@@ -91,7 +91,8 @@ class Itermocil(object):
         """
 
         v = self.get_version_string()
-
+        v = '2.9'
+        print float(v[:3])
         return float(v[:3])
 
     def get_num_panes_in_current_window(self):
@@ -257,6 +258,19 @@ class Itermocil(object):
                     i += 1
                     self.applescript.append(create_pane(qp, cp, "vertical"))
 
+        elif layout == 'even-vertical-and-3-stacks':
+            self.applescript.append(create_pane(1, 3, "vertical"))
+            self.applescript.append(create_pane(3, 4, "horizontal"))
+            self.applescript.append(create_pane(4, 5, "horizontal"))
+            self.applescript.append(create_pane(1, 2, "horizontal"))
+            # self.applescript.append(create_pane(3, 1, "horizontal"))
+            # self.applescript.append(create_pane(1, 0, "horizontal"))
+            # self.applescript.append(prefix + 'keystroke "d" using command down')
+            # self.applescript.append(prefix + 'keystroke "D" using command down')
+            # self.applescript.append(prefix + 'keystroke "D" using command down')
+            #
+            # self.applescript.append(prefix + 'key code 123 using {command down}')
+            # self.applescript.append(prefix + 'keystroke "D" using command down')
         # Raise an exception if we don't recognise the layout setting.
         else:
             raise ValueError("Unknown layout setting.")
